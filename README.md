@@ -1,1 +1,0 @@
-# tg_gift_bot
