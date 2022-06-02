@@ -1,6 +1,5 @@
 import sqlite3
 
-
 DB_NAME = 'gifts.db'
 
 
@@ -9,6 +8,7 @@ def db_connection(func):
     Decorator for secure connection to sqlite using context manager.
     Creates connection to DB if not exist and returns it.
     """
+
     def wrapper(*args, **kwargs):
         with sqlite3.connect(DB_NAME) as conn:
             kwargs['conn'] = conn
@@ -19,7 +19,7 @@ def db_connection(func):
 
 
 @db_connection
-def _init_db(conn: sqlite3.Connection, force=False):
+def _init_db(conn: sqlite3.Connection, force: bool = False):
     cursor = conn.cursor()
     if force:
         cursor.execute('DROP TABLE IF EXISTS user_room')
@@ -35,4 +35,4 @@ def _init_db(conn: sqlite3.Connection, force=False):
 
 
 if __name__ == '__main__':
-    _init_db(force=True)
+    _init_db()
